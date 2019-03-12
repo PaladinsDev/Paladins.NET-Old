@@ -31,6 +31,21 @@ namespace PaladinsDev.PaladinsDotNET
             return instance;
         }
 
+        private string MakeSignature(string input)
+        {
+            var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            var bytes = System.Text.Encoding.UTF8.GetBytes(input);
+            bytes = md5.ComputeHash(bytes);
+            var output = new System.Text.StringBuilder();
+
+            foreach(byte b in bytes)
+            {
+                output.Append(b.ToString("x2").ToLower());
+            }
+
+            return output.ToString();
+        }
+
         private JToken MakeRequest(string url)
         {
             var response = this.client.DownloadString(url);
