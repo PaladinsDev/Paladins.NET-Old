@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Paladins.NET
+namespace PaladinsDev.PaladinsDotNET
 {
-    public class Class1
+    public class API
     {
+        private string DevId;
+        private string AuthKey;
     }
 }
