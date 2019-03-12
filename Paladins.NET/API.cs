@@ -31,6 +31,11 @@ namespace PaladinsDev.PaladinsDotNET
             return instance;
         }
 
+        private string MakeTimestamp()
+        {
+            return (System.DateTime.UtcNow.ToString("yyyyMMddHHmm") + "00");
+        }
+
         private string MakeSignature(string input)
         {
             var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
