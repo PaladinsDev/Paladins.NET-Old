@@ -50,6 +50,65 @@ namespace PaladinsDev.PaladinsDotNET
 
             return output.ToString();
         }
+        
+        // TODO: Get session before I finish this method.
+        // TODO: Do Cache.cs before I do session method.
+
+        private string BuildUrl(string method, 
+                                string player = null, 
+                                int language = -1, 
+                                int matchId = -1, 
+                                int champId = -1, 
+                                int queue = -1, 
+                                int tier = -1, 
+                                int season = -1, 
+                                int platform = -1)
+        {
+            // TODO: Finish this URL
+            string baseUrl = $"{Variables.API_URL}/{this.DevId}/";
+
+            if (platform > -1)
+            {
+                baseUrl += $"/{platform}";
+            }
+
+            if (player != null)
+            {
+                baseUrl += $"/{player}";
+            }
+
+            if (champId > -1)
+            {
+                baseUrl += $"/{champId}";
+            }
+
+            if (language > -1)
+            {
+                baseUrl += $"/{language}";
+            }
+
+            if (matchId > -1)
+            {
+                baseUrl += $"/{matchId}";
+            }
+
+            if (queue > -1)
+            {
+                baseUrl += $"/{queue}";
+            }
+
+            if (tier > -1)
+            {
+                baseUrl += $"/{tier}";
+            }
+
+
+            if (season > -1)
+            {
+                baseUrl += $"/{season}";
+            }
+            return baseUrl;
+        }
 
         private JToken MakeRequest(string url)
         {
