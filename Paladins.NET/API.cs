@@ -19,6 +19,7 @@ namespace PaladinsDev.PaladinsDotNET
             this.AuthKey = key;
             this.LanguageId = 1;
             this.client = new WebClient { Proxy = null };
+            this.cache = new Cache();
         }
 
         public static API Instance(string id, string key)
@@ -31,12 +32,12 @@ namespace PaladinsDev.PaladinsDotNET
             return instance;
         }
 
-        private string MakeTimestamp()
+        private string GetTimestamp()
         {
             return (System.DateTime.UtcNow.ToString("yyyyMMddHHmm") + "00");
         }
 
-        private string MakeSignature(string input)
+        private string GetSignature(string input)
         {
             var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
             var bytes = System.Text.Encoding.UTF8.GetBytes(input);
