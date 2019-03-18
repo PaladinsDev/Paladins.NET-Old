@@ -32,6 +32,31 @@ namespace PaladinsDev.PaladinsDotNET
             return instance;
         }
 
+        public JToken GetDataUsage()
+        {
+            return this.MakeRequest(this.BuildUrl("getdataused"));
+        }
+
+        private string GetSession()
+        {
+            return this.cache.Remember(Variables.CACHE_SESSION_ID, 12, GetSessionFromAPI).ToString();
+        }
+
+        private string GetSessionFromAPI()
+        {
+            string url = $"{Variables.API_URL}/createsessionjson/{this.DevId}/{this.GetSignature(this.DevId + "createsession" + this.AuthKey + this.GetTimestamp())}/{this.GetTimestamp()}";
+
+            JToken resp = this.MakeRequest(url);
+
+            if (resp.SelectToken("ret_msg").ToString() != "Approved" || resp.SelectToken("session_id") == null)
+            {
+                throw new System.Exception(resp.SelectToken("ret_msg").ToString());
+            } else
+            {
+                return resp.SelectToken("session_id").ToString();
+            }
+        }
+
         private string GetTimestamp()
         {
             return (System.DateTime.UtcNow.ToString("yyyyMMddHHmm") + "00");
