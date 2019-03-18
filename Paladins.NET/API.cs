@@ -65,7 +65,6 @@ namespace PaladinsDev.PaladinsDotNET
                                 int season = -1, 
                                 int platform = -1)
         {
-            // TODO: Finish this URL
             string baseUrl = $"{Variables.API_URL}/{method}Json/{this.DevId}/{this.GetSignature(this.DevId + method + this.AuthKey + this.GetTimestamp())}/{this.GetSession()}/{this.GetTimestamp()}";
 
             if (platform > -1)
