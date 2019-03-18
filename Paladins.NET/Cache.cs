@@ -11,14 +11,14 @@ namespace PaladinsDev.PaladinsDotNET
         {
             this.cache = MemoryCache.Default;
         }
-        public T Remember<T>(string itemName, int timeToCache, Func<T> setFunction)
+        public T Remember<T>(string itemName, int minutesToLive, Func<T> setFunction)
         {
             var cacheItem = (T)this.cache[itemName];
 
             if (cacheItem == null)
             {
                 CacheItemPolicy policy = new CacheItemPolicy();
-                policy.AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(timeToCache);
+                policy.AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(minutesToLive);
 
                 cacheItem = setFunction();
                 this.cache.Set(itemName, cacheItem, policy);
@@ -28,4 +28,3 @@ namespace PaladinsDev.PaladinsDotNET
         }
     }
 }
-t
